@@ -1,14 +1,22 @@
 package com.rgosdeveloper.tasks.presentation.adapters
 
+import android.content.res.ColorStateList
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.rgosdeveloper.tasks.R
 import com.rgosdeveloper.tasks.databinding.ItemTaskBinding
+import com.rgosdeveloper.tasks.domain.TaskModel
 
-class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(
+    private val filter: String,
+    private val toogleStatusTask: (Int) -> Unit,
+) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
-    private val tasks = mutableListOf<String>()
-    fun setTasks(newTasks: List<String>) {
+    private val tasks = mutableListOf<TaskModel>()
+    fun setTasks(newTasks: List<TaskModel>) {
         tasks.clear()
         tasks.addAll(newTasks)
         notifyDataSetChanged()
@@ -16,8 +24,35 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(task: String) {
-            binding.tvDescTask.text = task
+        fun bind(task: TaskModel) {
+            binding.rbTasks.text = task.description
+            if (task.isDone) {
+                binding.rbTasks.paintFlags = binding.rbTasks.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else{
+                binding.rbTasks.paintFlags = binding.rbTasks.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            }
+            binding.rbTasks.isChecked = task.isDone
+
+            binding.rbTasks.setOnClickListener {
+                toogleStatusTask(task.id)
+                notifyDataSetChanged()
+            }
+
+            when (filter) {
+                "today" -> {
+                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.todayColor))
+                }
+                "tomorrow" -> {
+                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.tomorrowColor))
+                }
+                "week" -> {
+                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.weekColor))
+                }
+                "month" -> {
+                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.monthColor
+                    ))
+                }
+            }
         }
     }
 

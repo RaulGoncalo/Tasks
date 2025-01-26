@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="gray">#595959</color> <!-- Azul escuro -->
+    <color name="todayColor">#680607</color>
+    <color name="tomorrowColor">#A45415</color>
+    <color name="weekColor">#05400A</color>
+    <color name="monthColor">#233075</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
