@@ -5,6 +5,12 @@
     <color name="weekColor">#05400A</color>
     <color name="monthColor">#233075</color>
 
+    <color name="gray">#363636</color>"
+    <color name="backgroundButton">#515151</color>"
+    <color name="backgroundButtonPress">#363636</color>"
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="backgroundEditTextColor">#DBDBDB</color>
+    <color name="backgroundEditTextPressedColor">#C7C7C7</color>
 </resources>
