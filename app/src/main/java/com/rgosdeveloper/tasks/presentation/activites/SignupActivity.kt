@@ -38,8 +38,6 @@ class SignupActivity : AppCompatActivity() {
         authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
         setObservers()
-
-
         initViews()
     }
 
@@ -47,17 +45,14 @@ class SignupActivity : AppCompatActivity() {
         authViewModel.signUpState.observe(this) {
             when (it) {
                 is ResultState.Success -> {
-                    Toast.makeText(this, "Usuário cadastrado com sucesso", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this, "Usuário cadastrado com sucesso", Toast.LENGTH_SHORT).show()
                     finish()
                     hideLoading()
                 }
-
                 is ResultState.Error -> {
                     Toast.makeText(this, it.exception.message, Toast.LENGTH_SHORT).show()
                     hideLoading()
                 }
-
                 is ResultState.Loading -> showLoading()
             }
         }
@@ -65,24 +60,30 @@ class SignupActivity : AppCompatActivity() {
         authViewModel.nameState.observe(this) {
             if (it is ResultValidate.Error) {
                 binding.editTxtLayoutName.error = it.message
+                binding.editTxtLayoutName.isErrorEnabled = true
             } else {
                 binding.editTxtLayoutName.error = null
+                binding.editTxtLayoutName.isErrorEnabled = false
             }
         }
 
         authViewModel.emailState.observe(this) {
             if (it is ResultValidate.Error) {
                 binding.editTxtLayoutEmail.error = it.message
+                binding.editTxtLayoutEmail.isErrorEnabled = true
             } else {
                 binding.editTxtLayoutEmail.error = null
+                binding.editTxtLayoutEmail.isErrorEnabled = false
             }
         }
 
         authViewModel.passwordState.observe(this) {
             if (it is ResultValidate.Error) {
                 binding.editTxtLayoutPassword.error = it.message
+                binding.editTxtLayoutPassword.isErrorEnabled = true
             } else {
                 binding.editTxtLayoutPassword.error = null
+                binding.editTxtLayoutPassword.isErrorEnabled = false
             }
         }
     }
@@ -101,24 +102,24 @@ class SignupActivity : AppCompatActivity() {
                 finish()
             }
 
-            editTxtName.setOnFocusChangeListener { v, hasFocus ->
+            editTxtName.setOnFocusChangeListener { _, hasFocus ->
                 if(hasFocus){
                     editTxtLayoutName.error = null
-                    editTxtName.error = null
+                    editTxtLayoutName.isErrorEnabled = false
                 }
             }
 
-            editTxtEmail.setOnFocusChangeListener { v, hasFocus ->
+            editTxtEmail.setOnFocusChangeListener { _, hasFocus ->
                 if(hasFocus){
                     editTxtLayoutEmail.error = null
-                    editTxtEmail.error = null
+                    editTxtLayoutEmail.isErrorEnabled = false
                 }
             }
 
-            editTxtPassword.setOnFocusChangeListener { v, hasFocus ->
+            editTxtPassword.setOnFocusChangeListener { _, hasFocus ->
                 if(hasFocus){
                     editTxtLayoutPassword.error = null
-                    editTxtPassword.error = null
+                    editTxtLayoutPassword.isErrorEnabled = false
                 }
             }
 

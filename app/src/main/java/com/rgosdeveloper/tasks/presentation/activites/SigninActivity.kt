@@ -60,16 +60,20 @@ class SigninActivity : AppCompatActivity() {
         authViewModel.emailState.observe(this) {
             if (it is ResultValidate.Error) {
                 binding.editTxtLayoutEmail.error = it.message
-            }else{
+                binding.editTxtLayoutEmail.isErrorEnabled = true
+            } else {
                 binding.editTxtLayoutEmail.error = null
+                binding.editTxtLayoutEmail.isErrorEnabled = false
             }
         }
 
         authViewModel.passwordState.observe(this) {
-            if(it is ResultValidate.Error){
+            if (it is ResultValidate.Error) {
                 binding.editTxtLayoutPassword.error = it.message
-            }else{
+                binding.editTxtLayoutPassword.isErrorEnabled = true
+            } else {
                 binding.editTxtLayoutPassword.error = null
+                binding.editTxtLayoutPassword.isErrorEnabled = false
             }
         }
     }
@@ -101,17 +105,17 @@ class SigninActivity : AppCompatActivity() {
                 authViewModel.signIn(user)
             }
 
-            editTxtPassword.setOnFocusChangeListener { v, hasFocus ->
+            editTxtEmail.setOnFocusChangeListener { _, hasFocus ->
                 if(hasFocus){
-                    editTxtLayoutPassword.error = null
-                    editTxtPassword.error = null
+                    editTxtLayoutEmail.error = null
+                    editTxtLayoutEmail.isErrorEnabled = false
                 }
             }
 
-            editTxtEmail.setOnFocusChangeListener { v, hasFocus ->
+            editTxtPassword.setOnFocusChangeListener { _, hasFocus ->
                 if(hasFocus){
-                    editTxtLayoutEmail.error = null
-                    editTxtEmail.error = null
+                    editTxtLayoutPassword.error = null
+                    editTxtLayoutPassword.isErrorEnabled = false
                 }
             }
 
