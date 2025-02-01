@@ -9,6 +9,8 @@
     <color name="backgroundButton">#515151</color>"
     <color name="backgroundButtonPress">#363636</color>"
 
+    <color name="error_edit_text">#FD2323</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="backgroundEditTextColor">#DBDBDB</color>

@@ -54,19 +54,21 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTxtLayoutEmail"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/edittext_background"
                 android:textColorHint="@color/black"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:cursorColor="@color/gray"
+                app:errorIconTint="@color/error_edit_text"
+                app:errorTextColor="@color/error_edit_text"
                 app:hintTextColor="@color/gray">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTxtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_background"
                     android:hint="E-mail"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/gray" />
@@ -75,10 +77,11 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/editTxtLayoutPassword"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/edittext_background"
                 android:textColorHint="@color/black"
+                app:errorIconTint="@color/error_edit_text"
+                app:errorTextColor="@color/error_edit_text"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:cursorColor="@color/gray"
@@ -90,6 +93,7 @@
                     android:id="@+id/editTxtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_background"
                     android:hint="Senha"
                     android:inputType="textPassword"
                     android:textColor="@color/gray" />
@@ -98,7 +102,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSignIn"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_backgroudd"
                 android:text="ENTRAR"
@@ -118,4 +122,21 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </eightbitlab.com.blurview.BlurView>
+
+    <FrameLayout
+        android:id="@+id/loadingOverlayMovieDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
