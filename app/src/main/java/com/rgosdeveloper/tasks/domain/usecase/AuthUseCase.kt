@@ -9,6 +9,28 @@ import javax.inject.Inject
 class AuthUseCase @Inject constructor(private val repository: AuthRepository)  {
     suspend fun signUp(user: UserModel) : ResultState<Boolean> {
         return try {
+            val name = user.name
+            val email = user.email
+            val password = user.password
+
+            val resultValidateName = validateName(name)
+            val resultValidateEmail = validateEmail(email)
+            val resultValidatePassword = validatePassword(password)
+
+            if(resultValidateName is ResultValidate.Error){
+                return ResultState.Error(Exception(resultValidateName.message))
+            }
+
+            if(resultValidateEmail is ResultValidate.Error){
+                return ResultState.Error(Exception(resultValidateEmail.message))
+            }
+
+            if(resultValidatePassword is ResultValidate.Error){
+                return ResultState.Error(Exception(resultValidatePassword.message))
+            }
+
+
+
             repository.signUp(user)
         }catch (e: Exception){
             ResultState.Error(e)

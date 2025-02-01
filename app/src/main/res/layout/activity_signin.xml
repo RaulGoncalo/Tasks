@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="Tasks"
+        android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="42sp"
@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Faça seu Login"
+                android:text="@string/title_signin"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_background"
-                    android:hint="E-mail"
+                    android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/gray" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_background"
-                    android:hint="Senha"
+                    android:hint="@string/hint_password"
                     android:inputType="textPassword"
                     android:textColor="@color/gray" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -105,14 +105,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_backgroudd"
-                android:text="ENTRAR"
+                android:text="@string/btn_signin"
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtLinkSignUp"
-                android:text="cadastrar-se"
+                android:text="@string/btn_signup_link"
                 android:layout_marginTop="32dp"
                 android:textAlignment="center"
                 android:textSize="16sp"

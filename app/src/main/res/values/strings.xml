@@ -2,4 +2,15 @@
     <string name="app_name">Tasks</string>
     <string name="open_nav">Open navigation drawer</string>
     <string name="close_nav">Close navigation drawer</string>
+
+    <string name="hint_name">Nome</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_password">Senha</string>
+
+    <string name="title_signin">Faça seu Login</string>
+    <string name="title_signup">Faça seu cadastro</string>
+
+    <string name="btn_signin">ENTRAR</string>
+    <string name="btn_signup">CADASTRAR</string>
+    <string name="btn_signup_link">cadastrar-se</string>
 </resources>
