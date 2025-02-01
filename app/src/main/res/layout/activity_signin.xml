@@ -124,7 +124,7 @@
     </eightbitlab.com.blurview.BlurView>
 
     <FrameLayout
-        android:id="@+id/loadingOverlayMovieDetails"
+        android:id="@+id/loadingState"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#80000000"

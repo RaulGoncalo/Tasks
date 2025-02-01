@@ -32,7 +32,20 @@ class AuthViewModel @Inject constructor(private val useCase: AuthUseCase) : View
     fun signUp(user: UserModel) {
         viewModelScope.launch {
             _signUpState.value = ResultState.Loading
-            _signUpState.value = useCase.signUp(user)
+
+            _nameState.value = useCase.validateName(user.name)
+            _emailState.value = useCase.validateEmail(user.email)
+            _passwordState.value = useCase.validatePassword(user.password)
+
+            if(
+                _nameState.value is ResultValidate.Success &&
+                _emailState.value is ResultValidate.Success &&
+                _passwordState.value is ResultValidate.Success
+            ){
+                _signUpState.value = useCase.signUp(user)
+            }else{
+                _signUpState.value = ResultState.Error(Exception("Valide os campos!"))
+            }
         }
     }
 

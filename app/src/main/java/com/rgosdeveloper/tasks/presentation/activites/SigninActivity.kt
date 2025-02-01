@@ -75,11 +75,11 @@ class SigninActivity : AppCompatActivity() {
     }
 
     private fun showLoading() {
-        binding.loadingOverlayMovieDetails.visibility = View.VISIBLE
+        binding.loadingState.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        binding.loadingOverlayMovieDetails.visibility = View.GONE
+        binding.loadingState.visibility = View.GONE
     }
 
     private fun initViews() {
@@ -88,7 +88,6 @@ class SigninActivity : AppCompatActivity() {
             editTxtPassword.setText("1234567")
 
             btnSignIn.setOnClickListener {
-
                 val email = editTxtEmail.text.toString()
                 val password = editTxtPassword.text.toString()
 
