@@ -6,8 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.rgosdeveloper.tasks.domain.models.UserModel
 import com.rgosdeveloper.tasks.utils.DataStoreConstants
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class UserPreferencesRepository @Inject constructor(
@@ -21,13 +20,15 @@ class UserPreferencesRepository @Inject constructor(
         }
     }
 
-    val userPreferences: Flow<UserModel> = dataStore.data.map { preferences ->
+    // Função assíncrona para obter as preferências do usuário
+    suspend fun getUserPreferences(): UserModel {
+        val preferences = dataStore.data.first() // Usando first() para capturar o primeiro valor emitido
         val name = preferences[stringPreferencesKey(DataStoreConstants.USER_NAME)]
         val email = preferences[stringPreferencesKey(DataStoreConstants.USER_EMAIL)]
         val token = preferences[stringPreferencesKey(DataStoreConstants.USER_TOKEN)]
 
-        if (name != null && email != null && token != null) {
-            UserModel(name, email, token,"")
+        return if (name != null && email != null && token != null) {
+            UserModel(name, email, token, "")
         } else {
             UserModel("", "", "", "")
         }

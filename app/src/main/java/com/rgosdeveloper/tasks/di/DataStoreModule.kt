@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.rgosdeveloper.tasks.data.local.dataStore
 import com.rgosdeveloper.tasks.data.repository.UserPreferencesRepository
+import com.rgosdeveloper.tasks.domain.usecase.UserPreferencesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,11 @@ object DataStoreModule {
     @Provides
     fun provideUserPreferencesRepository(dataStore: DataStore<Preferences>): UserPreferencesRepository {
         return UserPreferencesRepository(dataStore)
+    }
+
+    @Provides
+    fun provideUserPreferencesUseCase(userPreferencesRepository: UserPreferencesRepository): UserPreferencesUseCase {
+        return UserPreferencesUseCase(userPreferencesRepository)
     }
 
 }
