@@ -3,10 +3,10 @@ package com.rgosdeveloper.tasks.di
 import com.rgosdeveloper.tasks.data.remote.ApiService
 import com.rgosdeveloper.tasks.data.remote.AuthInterceptor
 import com.rgosdeveloper.tasks.data.repository.AuthRepositoryImpl
+import com.rgosdeveloper.tasks.data.repository.UserPreferencesRepository
 import com.rgosdeveloper.tasks.domain.repository.AuthRepository
 import com.rgosdeveloper.tasks.domain.usecase.AuthUseCase
 import com.rgosdeveloper.tasks.utils.ApiConstants
-import com.rgosdeveloper.tasks.utils.AppConstants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,8 +16,9 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-@InstallIn(ViewModelComponent::class)
+
 @Module
+@InstallIn(ViewModelComponent::class)
 object ApiModule {
     @Provides
     fun provideAuthInterceptor(): Interceptor {
@@ -47,7 +48,7 @@ object ApiModule {
     }
 
     @Provides
-    fun provideAuthUseCase(authRepository: AuthRepository): AuthUseCase {
-        return AuthUseCase(authRepository)
+    fun provideAuthUseCase(authRepository: AuthRepository, userPreferencesRepository: UserPreferencesRepository): AuthUseCase {
+        return AuthUseCase(authRepository, userPreferencesRepository)
     }
 }

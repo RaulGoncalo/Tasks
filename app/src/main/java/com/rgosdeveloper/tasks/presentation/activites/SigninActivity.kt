@@ -4,7 +4,6 @@ import android.R
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
@@ -13,7 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.rgosdeveloper.tasks.databinding.ActivitySigninBinding
-import com.rgosdeveloper.tasks.domain.UserModel
+import com.rgosdeveloper.tasks.domain.models.UserModel
 import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.domain.common.ResultValidate
 import com.rgosdeveloper.tasks.presentation.viewmodel.AuthViewModel
@@ -87,33 +86,24 @@ class SigninActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        with(binding){
-            editTxtEmail.setText("raulgoncalo.98@gmail.com")
-            editTxtPassword.setText("1234567")
-
+        with(binding) {
             btnSignIn.setOnClickListener {
                 val email = editTxtEmail.text.toString()
                 val password = editTxtPassword.text.toString()
 
-                val user = UserModel(
-                    token = "",
-                    name = "",
-                    email = email,
-                    password = password
-                )
                 hideKeyboardAndClearFocus()
-                authViewModel.signIn(user)
+                authViewModel.signIn(email, password)
             }
 
             editTxtEmail.setOnFocusChangeListener { _, hasFocus ->
-                if(hasFocus){
+                if (hasFocus) {
                     editTxtLayoutEmail.error = null
                     editTxtLayoutEmail.isErrorEnabled = false
                 }
             }
 
             editTxtPassword.setOnFocusChangeListener { _, hasFocus ->
-                if(hasFocus){
+                if (hasFocus) {
                     editTxtLayoutPassword.error = null
                     editTxtLayoutPassword.isErrorEnabled = false
                 }

@@ -6,12 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rgosdeveloper.tasks.R
 import com.rgosdeveloper.tasks.databinding.FragmentTasksBinding
 import com.rgosdeveloper.tasks.presentation.adapters.TaskAdapter
-import com.rgosdeveloper.tasks.domain.TaskModel
+import com.rgosdeveloper.tasks.domain.models.TaskModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

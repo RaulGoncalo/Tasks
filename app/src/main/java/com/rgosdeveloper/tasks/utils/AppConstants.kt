@@ -23,3 +23,10 @@ object ApiConstants {
         const val SIGN_IN = "signin"
     }
 }
+
+object DataStoreConstants {
+    const val NAME_DATA_STORE = "tasks_preferences"
+    const val USER_NAME = "user_name"
+    const val USER_EMAIL = "user_email"
+    const val USER_TOKEN = "user_token"
+}

@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rgosdeveloper.tasks.R
 import com.rgosdeveloper.tasks.databinding.ItemTaskBinding
-import com.rgosdeveloper.tasks.domain.TaskModel
+import com.rgosdeveloper.tasks.domain.models.TaskModel
 
 class TaskAdapter(
     private val filter: String,

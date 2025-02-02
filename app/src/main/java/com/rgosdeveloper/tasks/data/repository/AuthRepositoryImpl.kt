@@ -2,8 +2,9 @@ package com.rgosdeveloper.tasks.data.repository
 
 import android.util.Log
 import com.rgosdeveloper.tasks.data.remote.ApiService
-import com.rgosdeveloper.tasks.domain.UserModel
+import com.rgosdeveloper.tasks.domain.models.UserModel
 import com.rgosdeveloper.tasks.domain.common.ResultState
+import com.rgosdeveloper.tasks.domain.models.SignInModel
 import com.rgosdeveloper.tasks.domain.repository.AuthRepository
 import javax.inject.Inject
 
@@ -31,10 +32,10 @@ class AuthRepositoryImpl @Inject constructor(
         return ResultState.Error(Exception(messageErro))
     }
 
-    override suspend fun signIn(user: UserModel): ResultState<UserModel> {
+    override suspend fun signIn(email: String, password: String): ResultState<UserModel> {
         var messageErro = ""
         try {
-            val response = apiService.signIn(user)
+            val response = apiService.signIn(SignInModel(email, password))
 
             if (response.isSuccessful && response.code() == 200) {
                 val user = response.body()

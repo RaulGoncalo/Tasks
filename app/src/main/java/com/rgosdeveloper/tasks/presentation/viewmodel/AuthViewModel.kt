@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rgosdeveloper.tasks.domain.UserModel
+import com.rgosdeveloper.tasks.domain.models.UserModel
 import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.domain.common.ResultValidate
 import com.rgosdeveloper.tasks.domain.usecase.AuthUseCase
@@ -49,14 +49,14 @@ class AuthViewModel @Inject constructor(private val useCase: AuthUseCase) : View
         }
     }
 
-    fun signIn(user: UserModel) {
+    fun signIn(email: String, password: String) {
         viewModelScope.launch {
             _signInState.value = ResultState.Loading
-            _emailState.value = useCase.validateEmail(user.email)
-            _passwordState.value = useCase.validatePassword(user.password)
+            _emailState.value = useCase.validateEmail(email)
+            _passwordState.value = useCase.validatePassword(password)
 
             if(_emailState.value is ResultValidate.Success && _passwordState.value is ResultValidate.Success){
-                _signInState.value = useCase.singIn(user)
+                _signInState.value = useCase.singIn(email, password)
             }else{
                 _signInState.value = ResultState.Error(Exception("Valide os campos!"))
             }

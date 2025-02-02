@@ -1,13 +1,17 @@
 package com.rgosdeveloper.tasks.domain.usecase
 
-import com.rgosdeveloper.tasks.domain.UserModel
+import com.rgosdeveloper.tasks.data.repository.UserPreferencesRepository
+import com.rgosdeveloper.tasks.domain.models.UserModel
 import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.domain.common.ResultValidate
 import com.rgosdeveloper.tasks.domain.repository.AuthRepository
 import javax.inject.Inject
 
-class AuthUseCase @Inject constructor(private val repository: AuthRepository)  {
-    suspend fun signUp(user: UserModel) : ResultState<Boolean> {
+class AuthUseCase @Inject constructor(
+    private val repository: AuthRepository,
+    private val userPreferencesRepository: UserPreferencesRepository
+) {
+    suspend fun signUp(user: UserModel): ResultState<Boolean> {
         return try {
             val name = user.name
             val email = user.email
@@ -17,45 +21,49 @@ class AuthUseCase @Inject constructor(private val repository: AuthRepository)  {
             val resultValidateEmail = validateEmail(email)
             val resultValidatePassword = validatePassword(password)
 
-            if(resultValidateName is ResultValidate.Error){
+            if (resultValidateName is ResultValidate.Error) {
                 return ResultState.Error(Exception(resultValidateName.message))
             }
 
-            if(resultValidateEmail is ResultValidate.Error){
+            if (resultValidateEmail is ResultValidate.Error) {
                 return ResultState.Error(Exception(resultValidateEmail.message))
             }
 
-            if(resultValidatePassword is ResultValidate.Error){
+            if (resultValidatePassword is ResultValidate.Error) {
                 return ResultState.Error(Exception(resultValidatePassword.message))
             }
 
 
 
             repository.signUp(user)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             ResultState.Error(e)
         }
     }
 
-    suspend fun singIn(user: UserModel) : ResultState<UserModel> {
-        return try {
-            val email = user.email
-            val password = user.password
-
+    suspend fun singIn(email: String, password: String): ResultState<UserModel> {
+        try {
             val resultValidateEmail = validateEmail(email)
             val resultValidatePassword = validatePassword(password)
 
-            if(resultValidateEmail is ResultValidate.Error){
+            if (resultValidateEmail is ResultValidate.Error) {
                 return ResultState.Error(Exception(resultValidateEmail.message))
             }
 
-            if(resultValidatePassword is ResultValidate.Error){
+            if (resultValidatePassword is ResultValidate.Error) {
                 return ResultState.Error(Exception(resultValidatePassword.message))
             }
 
-            repository.signIn(user)
-        }catch (e: Exception){
-            ResultState.Error(e)
+            val resultSignIn = repository.signIn(email, password)
+
+            if (resultSignIn is ResultState.Success) {
+                val user = resultSignIn.data
+                userPreferencesRepository.saveUserPreferences(user)
+            }
+
+            return resultSignIn
+        } catch (e: Exception) {
+            return ResultState.Error(e)
         }
     }
 

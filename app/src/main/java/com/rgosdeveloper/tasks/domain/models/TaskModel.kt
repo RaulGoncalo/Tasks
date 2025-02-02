@@ -1,4 +1,4 @@
-package com.rgosdeveloper.tasks.domain
+package com.rgosdeveloper.tasks.domain.models
 
 data class TaskModel (
     val description: String,
