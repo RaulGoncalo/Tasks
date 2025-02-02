@@ -5,14 +5,14 @@ import com.rgosdeveloper.tasks.data.remote.ApiService
 import com.rgosdeveloper.tasks.domain.models.UserModel
 import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.domain.models.SignInModel
-import com.rgosdeveloper.tasks.domain.repository.AuthRepository
+
 import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject constructor(
+class AuthRepository @Inject constructor(
     private val apiService: ApiService
-) : AuthRepository {
+) {
 
-    override suspend fun signUp(user: UserModel): ResultState<Boolean> {
+    suspend fun signUp(user: UserModel): ResultState<Boolean> {
         var messageErro = ""
         try {
             val response = apiService.signUp(user)
@@ -32,7 +32,7 @@ class AuthRepositoryImpl @Inject constructor(
         return ResultState.Error(Exception(messageErro))
     }
 
-    override suspend fun signIn(email: String, password: String): ResultState<UserModel> {
+    suspend fun signIn(email: String, password: String): ResultState<UserModel> {
         var messageErro = ""
         try {
             val response = apiService.signIn(SignInModel(email, password))

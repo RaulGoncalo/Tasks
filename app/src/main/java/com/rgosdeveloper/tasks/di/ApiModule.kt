@@ -2,9 +2,8 @@ package com.rgosdeveloper.tasks.di
 
 import com.rgosdeveloper.tasks.data.remote.ApiService
 import com.rgosdeveloper.tasks.data.remote.AuthInterceptor
-import com.rgosdeveloper.tasks.data.repository.AuthRepositoryImpl
+import com.rgosdeveloper.tasks.data.repository.AuthRepository
 import com.rgosdeveloper.tasks.data.repository.UserPreferencesRepository
-import com.rgosdeveloper.tasks.domain.repository.AuthRepository
 import com.rgosdeveloper.tasks.domain.usecase.AuthUseCase
 import com.rgosdeveloper.tasks.utils.ApiConstants
 import dagger.Module
@@ -44,11 +43,14 @@ object ApiModule {
 
     @Provides
     fun provideAuthRepository(apiService: ApiService): AuthRepository {
-        return AuthRepositoryImpl(apiService)
+        return AuthRepository(apiService)
     }
 
     @Provides
-    fun provideAuthUseCase(authRepository: AuthRepository, userPreferencesRepository: UserPreferencesRepository): AuthUseCase {
+    fun provideAuthUseCase(
+        authRepository: AuthRepository,
+        userPreferencesRepository: UserPreferencesRepository
+    ): AuthUseCase {
         return AuthUseCase(authRepository, userPreferencesRepository)
     }
 }

@@ -1,10 +1,10 @@
 package com.rgosdeveloper.tasks.domain.usecase
 
+import com.rgosdeveloper.tasks.data.repository.AuthRepository
 import com.rgosdeveloper.tasks.data.repository.UserPreferencesRepository
 import com.rgosdeveloper.tasks.domain.models.UserModel
 import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.domain.common.ResultValidate
-import com.rgosdeveloper.tasks.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class AuthUseCase @Inject constructor(
