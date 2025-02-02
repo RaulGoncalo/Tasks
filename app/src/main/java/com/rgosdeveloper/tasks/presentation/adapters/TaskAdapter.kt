@@ -12,7 +12,7 @@ import com.rgosdeveloper.tasks.domain.models.TaskModel
 
 class TaskAdapter(
     private val filter: String,
-    private val toogleStatusTask: (Int) -> Unit,
+    //private val toogleStatusTask: (Int) -> Unit,
 ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     private val tasks = mutableListOf<TaskModel>()
@@ -25,16 +25,15 @@ class TaskAdapter(
     inner class TaskViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(task: TaskModel) {
-            binding.rbTasks.text = task.description
-            if (task.isDone) {
+            binding.rbTasks.text = task.desc
+            if (task.doneAt != null) {
                 binding.rbTasks.paintFlags = binding.rbTasks.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }else{
                 binding.rbTasks.paintFlags = binding.rbTasks.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
-            binding.rbTasks.isChecked = task.isDone
-
+            binding.rbTasks.isChecked = task.doneAt != null
+            binding.txtDateTask.text = task.estimateAt
             binding.rbTasks.setOnClickListener {
-                toogleStatusTask(task.id)
                 notifyDataSetChanged()
             }
 

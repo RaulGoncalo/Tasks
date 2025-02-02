@@ -17,16 +17,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RadioButton
-            android:id="@+id/rbTasks"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-           android:layout_marginHorizontal="4dp"
-            android:layout_marginVertical="8dp"
-            android:text="RadioButton" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <RadioButton
+                android:id="@+id/rbTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="RadioButton"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/txtDateTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="00/00/0000"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,22 +2,38 @@ package com.rgosdeveloper.tasks.presentation.fragments
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rgosdeveloper.tasks.R
 import com.rgosdeveloper.tasks.databinding.FragmentTasksBinding
+import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.presentation.adapters.TaskAdapter
 import com.rgosdeveloper.tasks.domain.models.TaskModel
+import com.rgosdeveloper.tasks.presentation.viewmodel.TaskViewModel
+import com.rgosdeveloper.tasks.utils.AppConstants
+import com.rgosdeveloper.tasks.utils.formatDate
+import dagger.hilt.android.AndroidEntryPoint
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Date
+import java.util.Locale
 
+@AndroidEntryPoint
 class TasksFragment : Fragment() {
     private lateinit var filter: String
     private lateinit var binding: FragmentTasksBinding
     private lateinit var adapter: TaskAdapter
+    private lateinit var taskViewModel: TaskViewModel
+    private lateinit var currentDate: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,82 +41,86 @@ class TasksFragment : Fragment() {
     ): View? {
         // Recupera o filtro do Bundle
         binding = FragmentTasksBinding.inflate(inflater, container, false)
+
         filter = arguments?.getString("filter", "today") ?: "today"
 
+        currentDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate.now().toString()
+        } else {
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            sdf.format(Date())
+        }
+
+        taskViewModel = ViewModelProvider(this)[TaskViewModel::class.java]
+        setObservers()
+        taskViewModel.getTasks(currentDate, filter)
 
         initViews()
-
-        // Aqui você pode ajustar o RecyclerView conforme o filtro
-        loadTasksBasedOnFilter(filter)
-
         return binding.root
     }
-    
 
-    private fun initViews() {
-        val currentDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            LocalDate.now()
-        } else {
-            TODO("VERSION.SDK_INT < O")
-        }
-        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        val formattedDate = currentDate.format(formatter)
-
-        binding.tvDay.text = formattedDate.toString()
-
-        val tarefas = mutableListOf(
-            TaskModel("Hoje tenho que ir comprar pão na padaria e depois ir ao mercado comprar carne de vaca", 1, false),
-            TaskModel("Tarefa 2", 2, true),
-            TaskModel("Tarefa 3", 3, false),
-        )
-
-        adapter = TaskAdapter(filter) {id ->
-            tarefas.find{it.id == id}?.let{
-                it.isDone = !it.isDone
+    private fun setObservers() {
+        taskViewModel.tasks.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is ResultState.Success -> {
+                    val tasks = result.data
+                    adapter.setTasks(tasks)
+                    hideLoading()
+                }
+                is ResultState.Error -> {
+                    Toast.makeText(activity, result.exception.message, Toast.LENGTH_SHORT).show()
+                    hideLoading()
+                }
+                ResultState.Loading -> {
+                    showLoading()
+                }
             }
         }
-        adapter.setTasks(tarefas)
+    }
 
+    private fun initViews() {
+        val formattedDate = formatDate(currentDate)
+        binding.tvDay.text = formattedDate
+
+        adapter = TaskAdapter(filter)
         binding.rvTasks.adapter = adapter
         binding.rvTasks.layoutManager = LinearLayoutManager(context)
 
-
         // Ajusta a imagem de fundo com base no filtro
+        setBackgroundImg()
+    }
+
+    private fun setBackgroundImg() {
         when (filter) {
-            "today" -> {
+            AppConstants.FILTER_TODAY -> {
                 binding.backgroundImage.setImageResource(R.drawable.today)
                 binding.tvFilter.text = "Hoje"
             }
-            "tomorrow" -> {
+
+            AppConstants.FILTER_TOMORROW -> {
                 binding.backgroundImage.setImageResource(R.drawable.tomorrow)
                 binding.tvFilter.text = "Amanhã"
             }
-            "week" -> {
+
+            AppConstants.FILTER_WEEK -> {
                 binding.backgroundImage.setImageResource(R.drawable.week)
                 binding.tvFilter.text = "Semana"
 
             }
-            "month" -> {
+
+            AppConstants.FILTER_MONTH -> {
                 binding.backgroundImage.setImageResource(R.drawable.month)
                 binding.tvFilter.text = "Mês"
             }
         }
     }
 
-    private fun loadTasksBasedOnFilter(filtro: String) {
-        // Lógica para buscar as tarefas no banco de dados com base no filtro
-        when (filtro) {
-            "today" -> { /* Carregar tarefas de hoje */
-            }
-
-            "tomorrow" -> { /* Carregar tarefas de amanhã */
-            }
-
-            "week" -> { /* Carregar tarefas da semana */
-            }
-
-            "month" -> { /* Carregar tarefas do mês */
-            }
-        }
+    private fun showLoading() {
+        binding.pbLoading.visibility = View.VISIBLE
     }
+
+    private fun hideLoading() {
+        binding.pbLoading.visibility = View.GONE
+    }
+
 }

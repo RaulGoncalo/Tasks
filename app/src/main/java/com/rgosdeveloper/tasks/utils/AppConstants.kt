@@ -12,15 +12,22 @@ object AppConstants {
     const val FILTER_TOMORROW = "tomorrow"
     const val FILTER_WEEK = "week"
     const val FILTER_MONTH = "month"
+
+    const val DAY_TO_ADD_TOMORROW = 1
+    const val DAY_TO_ADD_WEEK = 1
+    const val DAY_TO_ADD_MONTH = 1
 }
 
 object ApiConstants {
-    const val BASE_URL = "http://192.168.0.18:3000/"
+    const val BASE_URL = "http://192.168.0.18:3000"
+    const val QUERY_DATE = "date"
+    const val PATH_ID = "id"
 
     // Endpoints
     object Endpoints {
-        const val SIGN_UP = "signup"
-        const val SIGN_IN = "signin"
+        const val SIGN_UP = "/signup"
+        const val SIGN_IN = "/signin"
+        const val TASKS = "/tasks"
     }
 }
 
