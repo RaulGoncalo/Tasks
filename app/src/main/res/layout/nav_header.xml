@@ -34,7 +34,7 @@
             android:layout_marginStart="12dp"
             android:elevation="12dp"
             android:shadowColor="@color/black"
-            android:text="Tasks"
+            android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="32sp"
             android:textStyle="bold|italic"
@@ -45,18 +45,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/txtUserNameHeaderDrawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-
-        android:text="Raul Gonçalo Oliveira da Silva"
+        android:text="@string/user_name_header_drawer"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtUserEmailHeaderDrawer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="raulgoncalo.98@gmail.com"
+        android:text="@string/user_email_header_drawer"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 </LinearLayout>

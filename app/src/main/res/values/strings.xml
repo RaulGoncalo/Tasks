@@ -15,5 +15,7 @@
     <string name="btn_signup">CADASTRAR</string>
     <string name="btn_signup_link">cadastrar-se</string>
 
+    <string name="user_name_header_drawer">Exemplo de Nome</string>
+    <string name="user_email_header_drawer">exemplo123.@gmail.com</string>
 
 </resources>

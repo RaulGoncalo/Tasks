@@ -30,3 +30,16 @@ object DataStoreConstants {
     const val USER_EMAIL = "user_email"
     const val USER_TOKEN = "user_token"
 }
+
+object MainConstants{
+    const val ERROR_USER_NULL = "Erro ao buscar informações do usuário!"
+    const val SUCCESS_SIGN_OUT_USER = "Logout realizado com sucesso!"
+
+    const val KEY_PUT_EXTRA_FRAGMENT = "filter"
+
+    const val TITLE_SIGN_OUT = "Deslogar?"
+    const val MESSAGE_SIGN_OUT = "Deseja realmente sair?"
+    const val TXT_NEGATIVE_BUTTON = "Cancelar"
+    const val TXT_POSITIVE_BUTTON = "Sim"
+
+}

@@ -19,11 +19,11 @@ class UserPreferencesViewModel @Inject constructor(
     private val _userPreferences = MutableLiveData<ResultState<UserModel>>()
     val userPreferences: LiveData< ResultState<UserModel>> get() = _userPreferences
 
-    fun saveUserPreferences(user: UserModel){
+    /*fun saveUserPreferences(user: UserModel){
         viewModelScope.launch {
             userPreferencesUseCase.saveUserPreferences(user)
         }
-    }
+    }*/
 
     fun getUserPreferences(){
         viewModelScope.launch {

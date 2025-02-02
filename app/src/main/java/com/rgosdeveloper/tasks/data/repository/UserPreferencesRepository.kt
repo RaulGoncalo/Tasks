@@ -29,7 +29,7 @@ class UserPreferencesRepository @Inject constructor(
         val token = preferences[stringPreferencesKey(DataStoreConstants.USER_TOKEN)]
 
         return if (name != null && email != null && token != null) {
-            ResultState.Success(UserModel(name, email, token, ""))
+            ResultState.Success(UserModel(name= name, email= email, token= token, password = ""))
         } else {
             ResultState.Error(Exception("Erro ao obter as preferências do usuário"))
         }
