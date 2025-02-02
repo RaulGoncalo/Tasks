@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.domain.models.UserModel
 import com.rgosdeveloper.tasks.domain.usecase.UserPreferencesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,8 +16,8 @@ class UserPreferencesViewModel @Inject constructor(
     private val userPreferencesUseCase: UserPreferencesUseCase
 ) : ViewModel() {
 
-    private val _userPreferences = MutableLiveData<UserModel>()
-    val userPreferences: LiveData<UserModel> get() = _userPreferences
+    private val _userPreferences = MutableLiveData<ResultState<UserModel>>()
+    val userPreferences: LiveData< ResultState<UserModel>> get() = _userPreferences
 
     fun saveUserPreferences(user: UserModel){
         viewModelScope.launch {
@@ -26,6 +27,7 @@ class UserPreferencesViewModel @Inject constructor(
 
     fun getUserPreferences(){
         viewModelScope.launch {
+            _userPreferences.value = ResultState.Loading
             val user = userPreferencesUseCase.getUserPreferences()
             _userPreferences.value = user
         }

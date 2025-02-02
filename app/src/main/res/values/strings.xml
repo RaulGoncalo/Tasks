@@ -9,8 +9,11 @@
 
     <string name="title_signin">Faça seu Login</string>
     <string name="title_signup">Faça seu cadastro</string>
+    <string name="title_splash">CARREGANDO...</string>
 
     <string name="btn_signin">ENTRAR</string>
     <string name="btn_signup">CADASTRAR</string>
     <string name="btn_signup_link">cadastrar-se</string>
+
+
 </resources>
