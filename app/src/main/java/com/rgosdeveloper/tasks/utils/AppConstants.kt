@@ -18,6 +18,13 @@ object AppConstants {
     const val DAY_TO_ADD_TOMORROW = 1
     const val DAY_TO_ADD_WEEK = 7
     const val DAY_TO_ADD_MONTH = 30
+
+    //dialog de exclusão item task
+    const val SUCCESS_MESSEGE_DELETE_TASK = "Tarefa deletada com sucesso!"
+    const val TITLE_DELETE_TASK = "Apagar?"
+    const val MESSAGE_DELETE_TASK = "Deseja realmente apagar a tarefa?"
+    const val TXT_NEGATIVE_BUTTON = "Não"
+    const val TXT_POSITIVE_BUTTON = "Sim"
 }
 
 object ApiConstants {

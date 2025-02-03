@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rgosdeveloper.tasks.R
 import com.rgosdeveloper.tasks.databinding.ItemTaskBinding
 import com.rgosdeveloper.tasks.domain.models.TaskModel
+import com.rgosdeveloper.tasks.utils.AppConstants
 
 class TaskAdapter(
     private val filter: String,
+    private val deleteTask: (Int) -> Unit,
     private val toogleStatusTask: (Int) -> Unit,
 ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
@@ -23,17 +25,26 @@ class TaskAdapter(
         notifyDataSetChanged()
     }
 
-    inner class TaskViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class TaskViewHolder(private val binding: ItemTaskBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(task: TaskModel) {
             val isDone = task.doneAt != null
+
             binding.rbTasks.text = task.desc
             if (isDone) {
-                binding.rbTasks.paintFlags = binding.rbTasks.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            }else{
-                binding.rbTasks.paintFlags = binding.rbTasks.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                binding.rbTasks.paintFlags =
+                    binding.rbTasks.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                binding.txtDateTask.text = "De ${task.estimateAt} concluida em ${task.doneAt}"
+            } else {
+                binding.rbTasks.paintFlags =
+                    binding.rbTasks.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                binding.txtDateTask.text = task.estimateAt
             }
-            binding.txtDateTask.text = task.estimateAt
+
+            binding.btnDelete.setOnClickListener {
+                deleteTask(task.id)
+            }
 
             binding.rbTasks.setOnClickListener {
                 toogleStatusTask(task.id)
@@ -42,18 +53,39 @@ class TaskAdapter(
             binding.rbTasks.isChecked = isDone
 
             when (filter) {
-                "today" -> {
-                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.todayColor))
+                AppConstants.FILTER_TODAY -> {
+                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.todayColor
+                        )
+                    )
                 }
-                "tomorrow" -> {
-                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.tomorrowColor))
+
+                AppConstants.FILTER_TOMORROW -> {
+                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.tomorrowColor
+                        )
+                    )
                 }
-                "week" -> {
-                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.weekColor))
+
+                AppConstants.FILTER_WEEK -> {
+                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.weekColor
+                        )
+                    )
                 }
-                "month" -> {
-                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(itemView.context, R.color.monthColor
-                    ))
+
+                AppConstants.FILTER_MONTH -> {
+                    binding.rbTasks.buttonTintList = ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            itemView.context, R.color.monthColor
+                        )
+                    )
                 }
             }
         }

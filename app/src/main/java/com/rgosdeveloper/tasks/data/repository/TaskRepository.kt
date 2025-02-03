@@ -13,7 +13,7 @@ class TaskRepository @Inject constructor(
         return try {
             val response = apiService.getTasks(date)
 
-            if(response.isSuccessful() && response.code() == 200){
+            if(response.isSuccessful && response.code() == 200){
                 val tasks = response.body()
                 if(tasks != null){
                     ResultState.Success(tasks)
@@ -34,10 +34,23 @@ class TaskRepository @Inject constructor(
     suspend fun toggleTask(id: Int) : ResultState<Unit>{
         return try {
             val response = apiService.toggleTask(id)
-            if(response.isSuccessful() && response.code() == 200){
+            if(response.isSuccessful && response.code() == 200){
                 ResultState.Success(Unit)
             }else{
                 ResultState.Error(Exception("Erro ao atualizar tarefa"))
+            }
+        }catch (e: Exception){
+            ResultState.Error(e)
+        }
+    }
+
+    suspend fun deleteTask(id: Int) : ResultState<Unit>{
+        return try {
+            val response = apiService.deleteTask(id)
+            if(response.isSuccessful && response.code() == 200){
+                ResultState.Success(Unit)
+            }else{
+                ResultState.Error(Exception("Erro ao deletar tarefa"))
             }
         }catch (e: Exception){
             ResultState.Error(e)

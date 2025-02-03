@@ -61,4 +61,8 @@ class TaskUseCase @Inject constructor(
     suspend fun toggleTask(id: Int) : ResultState<Unit>{
         return respository.toggleTask(id)
     }
+
+    suspend fun deleteTask(id: Int) : ResultState<Unit>{
+        return respository.deleteTask(id)
+    }
 }

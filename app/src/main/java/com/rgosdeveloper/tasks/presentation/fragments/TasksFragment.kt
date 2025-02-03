@@ -1,5 +1,6 @@
 package com.rgosdeveloper.tasks.presentation.fragments
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rgosdeveloper.tasks.R
@@ -15,8 +17,10 @@ import com.rgosdeveloper.tasks.databinding.FragmentTasksBinding
 import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.presentation.adapters.TaskAdapter
 import com.rgosdeveloper.tasks.domain.models.TaskModel
+import com.rgosdeveloper.tasks.presentation.activites.SigninActivity
 import com.rgosdeveloper.tasks.presentation.viewmodel.TaskViewModel
 import com.rgosdeveloper.tasks.utils.AppConstants
+import com.rgosdeveloper.tasks.utils.MainConstants
 import com.rgosdeveloper.tasks.utils.formatDate
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.ParseException
@@ -86,15 +90,38 @@ class TasksFragment : Fragment() {
         val formattedDate = formatDate(currentDate)
         binding.tvDay.text = formattedDate
 
-        adapter = TaskAdapter(filter) { idTask ->
-            handleToggleTask(idTask)
-        }
+        adapter = TaskAdapter(
+            filter,
+            { idTask ->
+                handleDeleteTask(idTask)
+            },
+            { idTask ->
+                handleToggleTask(idTask)
+            }
+        )
 
         binding.rvTasks.adapter = adapter
         binding.rvTasks.layoutManager = LinearLayoutManager(context)
 
         // Ajusta a imagem de fundo com base no filtro
         setBackgroundImg()
+    }
+
+    private fun handleDeleteTask(idTask: Int) {
+        context?.let {
+            AlertDialog.Builder(it)
+                .setTitle(AppConstants.TITLE_DELETE_TASK)
+                .setMessage(AppConstants.MESSAGE_DELETE_TASK)
+                .setNegativeButton(AppConstants.TXT_NEGATIVE_BUTTON){ dialog, posicao -> }
+                .setPositiveButton(AppConstants.TXT_POSITIVE_BUTTON) { dialog, posicao ->
+                    taskViewModel.deleteTask(idTask, currentDate, filter)
+                    Toast.makeText(it, AppConstants.SUCCESS_MESSEGE_DELETE_TASK, Toast.LENGTH_SHORT).show()
+                }
+                .create()
+                .show()
+        }
+
+
     }
 
     private fun handleToggleTask(idTask: Int) {
