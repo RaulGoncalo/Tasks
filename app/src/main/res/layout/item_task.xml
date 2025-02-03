@@ -12,33 +12,69 @@
         android:layout_height="wrap_content"
         android:elevation="4dp"
         app:cardCornerRadius="15dp"
+        android:backgroundTint="@color/backgroundCard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <RadioButton
-                android:id="@+id/rbTasks"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:text="RadioButton"
-                android:textSize="16dp" />
+            <LinearLayout
+                android:id="@+id/groupTask"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnDelete"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtDateTask"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="11sp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginHorizontal="16dp"
-                android:text="00/00/0000"
-                android:textAlignment="textEnd" />
-        </LinearLayout>
+                <RadioButton
+                    android:id="@+id/rbTasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="RadioButton"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/txtDateTask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="00/00/0000"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnDelete"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="8dp"
+                android:backgroundTint="@color/background_card_delete"
+                app:layout_constraintStart_toEndOf="@id/groupTask"
+                android:padding="24dp">
+
+                <ImageButton
+                    android:id="@+id/imageView2"
+                    android:background="@android:color/transparent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_delete_24"
+                    android:layout_gravity="center"/>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

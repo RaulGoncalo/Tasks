@@ -5,11 +5,13 @@
     <color name="weekColor">#05400A</color>
     <color name="monthColor">#233075</color>
 
-    <color name="gray">#363636</color>"
-    <color name="backgroundButton">#515151</color>"
-    <color name="backgroundButtonPress">#363636</color>"
+    <color name="gray">#363636</color>
+    <color name="backgroundCard">#545454</color>
+    <color name="backgroundButton">#515151</color>
+    <color name="backgroundButtonPress">#363636</color>
 
     <color name="error_edit_text">#FD2323</color>
+    <color name="background_card_delete">#444444</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
