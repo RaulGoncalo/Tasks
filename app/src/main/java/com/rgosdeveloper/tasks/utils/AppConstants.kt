@@ -7,6 +7,8 @@ object AppConstants {
     const val LOGOUT_MESSAGE = "Saindo do app"
     const val EMPTY_INPUT_MESSAGE = "Por favor, insira um texto"
 
+    const val KEY_PUT_EXTRA_FRAGMENT = "filter"
+
     // Filtros de tarefas
     const val FILTER_TODAY = "today"
     const val FILTER_TOMORROW = "tomorrow"
@@ -14,8 +16,8 @@ object AppConstants {
     const val FILTER_MONTH = "month"
 
     const val DAY_TO_ADD_TOMORROW = 1
-    const val DAY_TO_ADD_WEEK = 1
-    const val DAY_TO_ADD_MONTH = 1
+    const val DAY_TO_ADD_WEEK = 7
+    const val DAY_TO_ADD_MONTH = 30
 }
 
 object ApiConstants {
@@ -28,6 +30,8 @@ object ApiConstants {
         const val SIGN_UP = "/signup"
         const val SIGN_IN = "/signin"
         const val TASKS = "/tasks"
+        const val TASKS_PUT = "/tasks/{id}/toggle"
+        const val TASKS_DELETE = "/tasks/{id}"
     }
 }
 
@@ -41,12 +45,8 @@ object DataStoreConstants {
 object MainConstants{
     const val ERROR_USER_NULL = "Erro ao buscar informações do usuário!"
     const val SUCCESS_SIGN_OUT_USER = "Logout realizado com sucesso!"
-
-    const val KEY_PUT_EXTRA_FRAGMENT = "filter"
-
     const val TITLE_SIGN_OUT = "Deslogar?"
     const val MESSAGE_SIGN_OUT = "Deseja realmente sair?"
     const val TXT_NEGATIVE_BUTTON = "Cancelar"
     const val TXT_POSITIVE_BUTTON = "Sim"
-
 }

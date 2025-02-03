@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity() {
     private fun openTasksFragment(filter: String) {
         val fragment = TasksFragment().apply {
             arguments = Bundle().apply {
-                putString(MainConstants.KEY_PUT_EXTRA_FRAGMENT, filter)
+                putString(AppConstants.KEY_PUT_EXTRA_FRAGMENT, filter)
             }
         }
 

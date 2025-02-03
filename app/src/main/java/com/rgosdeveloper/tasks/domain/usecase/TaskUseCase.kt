@@ -57,4 +57,8 @@ class TaskUseCase @Inject constructor(
 
         return tasksResult
     }
+
+    suspend fun toggleTask(id: Int) : ResultState<Unit>{
+        return respository.toggleTask(id)
+    }
 }

@@ -36,12 +36,12 @@ interface ApiService {
         @Body task: TaskModel
     ) : Response<Unit>
 
-    @DELETE(ApiConstants.Endpoints.TASKS)
+    @DELETE(ApiConstants.Endpoints.TASKS_DELETE)
     suspend fun deleteTask(
         @Path(ApiConstants.PATH_ID) id: Int
     ) : Response<Unit>
 
-    @PUT(ApiConstants.Endpoints.TASKS)
+    @PUT(ApiConstants.Endpoints.TASKS_PUT)
     suspend fun toggleTask(
         @Path(ApiConstants.PATH_ID) id: Int
     ) : Response<Unit>

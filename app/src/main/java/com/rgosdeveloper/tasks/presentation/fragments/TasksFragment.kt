@@ -42,7 +42,9 @@ class TasksFragment : Fragment() {
         // Recupera o filtro do Bundle
         binding = FragmentTasksBinding.inflate(inflater, container, false)
 
-        filter = arguments?.getString("filter", "today") ?: "today"
+        filter =
+            arguments?.getString(AppConstants.KEY_PUT_EXTRA_FRAGMENT, AppConstants.FILTER_TODAY)
+                ?: AppConstants.FILTER_TODAY
 
         currentDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDate.now().toString()
@@ -67,10 +69,12 @@ class TasksFragment : Fragment() {
                     adapter.setTasks(tasks)
                     hideLoading()
                 }
+
                 is ResultState.Error -> {
                     Toast.makeText(activity, result.exception.message, Toast.LENGTH_SHORT).show()
                     hideLoading()
                 }
+
                 ResultState.Loading -> {
                     showLoading()
                 }
@@ -82,12 +86,19 @@ class TasksFragment : Fragment() {
         val formattedDate = formatDate(currentDate)
         binding.tvDay.text = formattedDate
 
-        adapter = TaskAdapter(filter)
+        adapter = TaskAdapter(filter) { idTask ->
+            handleToggleTask(idTask)
+        }
+
         binding.rvTasks.adapter = adapter
         binding.rvTasks.layoutManager = LinearLayoutManager(context)
 
         // Ajusta a imagem de fundo com base no filtro
         setBackgroundImg()
+    }
+
+    private fun handleToggleTask(idTask: Int) {
+        taskViewModel.toggleTask(idTask, currentDate, filter)
     }
 
     private fun setBackgroundImg() {

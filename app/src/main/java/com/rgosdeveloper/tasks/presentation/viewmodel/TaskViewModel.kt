@@ -25,4 +25,12 @@ class TaskViewModel @Inject constructor(
             _tasks.value = useCase.getTasks(todaysDate, filter)
         }
     }
+
+    fun toggleTask(id: Int, todaysDate: String, filter: String) {
+        viewModelScope.launch {
+            _tasks.value = ResultState.Loading
+            useCase.toggleTask(id)
+            _tasks.value = useCase.getTasks(todaysDate, filter)
+        }
+    }
 }

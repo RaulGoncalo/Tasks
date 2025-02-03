@@ -30,4 +30,17 @@ class TaskRepository @Inject constructor(
             ResultState.Error(e)
         }
     }
+
+    suspend fun toggleTask(id: Int) : ResultState<Unit>{
+        return try {
+            val response = apiService.toggleTask(id)
+            if(response.isSuccessful() && response.code() == 200){
+                ResultState.Success(Unit)
+            }else{
+                ResultState.Error(Exception("Erro ao atualizar tarefa"))
+            }
+        }catch (e: Exception){
+            ResultState.Error(e)
+        }
+    }
 }
