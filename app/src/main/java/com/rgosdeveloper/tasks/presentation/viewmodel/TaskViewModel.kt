@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rgosdeveloper.tasks.domain.models.TaskRequestModel
 import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.domain.models.TaskModel
 import com.rgosdeveloper.tasks.domain.usecase.TaskUseCase
@@ -38,6 +39,14 @@ class TaskViewModel @Inject constructor(
         viewModelScope.launch {
             _tasks.value = ResultState.Loading
             useCase.deleteTask(id)
+            _tasks.value = useCase.getTasks(todaysDate, filter)
+        }
+    }
+
+    fun addTask(task: TaskRequestModel, todaysDate: String, filter: String) {
+        viewModelScope.launch {
+            _tasks.value = ResultState.Loading
+            useCase.addTask(task)
             _tasks.value = useCase.getTasks(todaysDate, filter)
         }
     }

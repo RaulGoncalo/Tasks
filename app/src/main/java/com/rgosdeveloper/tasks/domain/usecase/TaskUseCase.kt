@@ -1,20 +1,12 @@
 package com.rgosdeveloper.tasks.domain.usecase
 
-import android.os.Build
-import android.util.Log
+import com.rgosdeveloper.tasks.domain.models.TaskRequestModel
 import com.rgosdeveloper.tasks.data.repository.TaskRepository
 import com.rgosdeveloper.tasks.domain.common.ResultState
 import com.rgosdeveloper.tasks.domain.models.TaskModel
 import com.rgosdeveloper.tasks.utils.AppConstants
 import com.rgosdeveloper.tasks.utils.addDaysToDate
 import com.rgosdeveloper.tasks.utils.formatDate
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.Calendar
-import java.util.Locale
 import javax.inject.Inject
 
 class TaskUseCase @Inject constructor(
@@ -64,5 +56,9 @@ class TaskUseCase @Inject constructor(
 
     suspend fun deleteTask(id: Int) : ResultState<Unit>{
         return respository.deleteTask(id)
+    }
+
+    suspend fun addTask(task: TaskRequestModel) : ResultState<Unit>{
+        return respository.addTask(task)
     }
 }

@@ -1,5 +1,6 @@
 package com.rgosdeveloper.tasks.data.remote
 
+import com.rgosdeveloper.tasks.domain.models.TaskRequestModel
 import com.rgosdeveloper.tasks.domain.models.SignInModel
 import com.rgosdeveloper.tasks.domain.models.TaskModel
 import com.rgosdeveloper.tasks.domain.models.UserModel
@@ -7,7 +8,6 @@ import com.rgosdeveloper.tasks.utils.ApiConstants
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
-import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -32,8 +32,8 @@ interface ApiService {
     ) : Response<List<TaskModel>>
 
     @POST(ApiConstants.Endpoints.TASKS)
-    suspend fun salveTask(
-        @Body task: TaskModel
+    suspend fun addTask(
+        @Body task: TaskRequestModel
     ) : Response<Unit>
 
     @DELETE(ApiConstants.Endpoints.TASKS_DELETE)

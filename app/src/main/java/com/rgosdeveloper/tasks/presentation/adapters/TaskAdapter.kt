@@ -35,11 +35,11 @@ class TaskAdapter(
             if (isDone) {
                 binding.rbTasks.paintFlags =
                     binding.rbTasks.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                binding.txtDateTask.text = "De ${task.estimateAt} concluida em ${task.doneAt}"
+                binding.txtDateTask.text = "Estimada para: ${task.estimateAt} concluida: ${task.doneAt}"
             } else {
                 binding.rbTasks.paintFlags =
                     binding.rbTasks.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-                binding.txtDateTask.text = task.estimateAt
+                binding.txtDateTask.text = "Estimada para: ${task.estimateAt}"
             }
 
             binding.btnDelete.setOnClickListener {

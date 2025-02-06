@@ -25,6 +25,12 @@ object AppConstants {
     const val MESSAGE_DELETE_TASK = "Deseja realmente apagar a tarefa?"
     const val TXT_NEGATIVE_BUTTON = "Não"
     const val TXT_POSITIVE_BUTTON = "Sim"
+
+    //Strings dos titulos das imagens:
+    const val TITLE_TODAY = "Hoje"
+    const val TITLE_TOMORROW = "Amanhã"
+    const val TITLE_WEEK = "Semana"
+    const val TITLE_MONTH = "Mês"
 }
 
 object ApiConstants {

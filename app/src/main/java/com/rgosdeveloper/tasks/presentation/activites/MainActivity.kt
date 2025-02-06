@@ -58,16 +58,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
-        userPreferencesViewModel.userPreferences.observe(this){
-            when(it){
+        userPreferencesViewModel.userPreferences.observe(this) {
+            when (it) {
                 is ResultState.Success -> {
                     user = it.data
                     hideLoading()
                     setupNavigationView()
                 }
+
                 is ResultState.Error -> {
                     Toast.makeText(this, it.exception.message, Toast.LENGTH_SHORT).show()
                 }
+
                 is ResultState.Loading -> {
                     showLoading()
                 }
@@ -86,7 +88,6 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         setWindowFlags()
         setupDrawerLayout()
-        setupFab()
     }
 
     private fun setWindowFlags() {
@@ -120,10 +121,10 @@ class MainActivity : AppCompatActivity() {
         val userNameTxt = headerView.findViewById<TextView>(R.id.txtUserNameHeaderDrawer)
         val userEmailTxt = headerView.findViewById<TextView>(R.id.txtUserEmailHeaderDrawer)
 
-        if(user != null){
+        if (user != null) {
             userNameTxt.text = user!!.name
             userEmailTxt.text = user!!.email
-        }else{
+        } else {
             Toast.makeText(this, MainConstants.ERROR_USER_NULL, Toast.LENGTH_SHORT).show()
         }
 
@@ -134,9 +135,13 @@ class MainActivity : AppCompatActivity() {
         val defaultItem = navigationView.menu.findItem(R.id.nav_today)
         defaultItem.isChecked = true
         handleNavigationDrawerItemSelected(defaultItem, backgroundHeader)
+
     }
 
-    private fun handleNavigationDrawerItemSelected(menuItem: MenuItem, backgroundHeader: LinearLayout): Boolean {
+    private fun handleNavigationDrawerItemSelected(
+        menuItem: MenuItem,
+        backgroundHeader: LinearLayout
+    ): Boolean {
         when (menuItem.itemId) {
             R.id.nav_logout -> handleLogout()
             else -> {
@@ -152,8 +157,8 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(MainConstants.TITLE_SIGN_OUT)
             .setMessage(MainConstants.MESSAGE_SIGN_OUT)
-            .setNegativeButton(MainConstants.TXT_NEGATIVE_BUTTON){dialog, posicao -> }
-            .setPositiveButton(MainConstants.TXT_POSITIVE_BUTTON) {dialog, posicao ->
+            .setNegativeButton(MainConstants.TXT_NEGATIVE_BUTTON) { dialog, posicao -> }
+            .setPositiveButton(MainConstants.TXT_POSITIVE_BUTTON) { dialog, posicao ->
                 userPreferencesViewModel.clearUserPreferences()
                 Toast.makeText(this, MainConstants.SUCCESS_SIGN_OUT_USER, Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, SigninActivity::class.java)
@@ -167,17 +172,40 @@ class MainActivity : AppCompatActivity() {
 
     private fun applyThemeBasedOnMenuItem(itemId: Int, backgroundHeader: LinearLayout): String {
         return when (itemId) {
-            R.id.nav_today -> applyTheme(R.color.todayColor, backgroundHeader, AppConstants.FILTER_TODAY)
-            R.id.nav_tomorrow -> applyTheme(R.color.tomorrowColor, backgroundHeader, AppConstants.FILTER_TOMORROW)
-            R.id.nav_week -> applyTheme(R.color.weekColor, backgroundHeader, AppConstants.FILTER_WEEK)
-            R.id.nav_month -> applyTheme(R.color.monthColor, backgroundHeader, AppConstants.FILTER_MONTH)
-            else -> applyTheme(R.color.todayColor, backgroundHeader, AppConstants.FILTER_TODAY) // Tema padrão
+            R.id.nav_today -> applyTheme(
+                R.color.todayColor,
+                backgroundHeader,
+                AppConstants.FILTER_TODAY
+            )
+
+            R.id.nav_tomorrow -> applyTheme(
+                R.color.tomorrowColor,
+                backgroundHeader,
+                AppConstants.FILTER_TOMORROW
+            )
+
+            R.id.nav_week -> applyTheme(
+                R.color.weekColor,
+                backgroundHeader,
+                AppConstants.FILTER_WEEK
+            )
+
+            R.id.nav_month -> applyTheme(
+                R.color.monthColor,
+                backgroundHeader,
+                AppConstants.FILTER_MONTH
+            )
+
+            else -> applyTheme(
+                R.color.todayColor,
+                backgroundHeader,
+                AppConstants.FILTER_TODAY
+            ) // Tema padrão
         }
     }
 
     private fun applyTheme(colorId: Int, backgroundHeader: LinearLayout, filter: String): String {
         backgroundHeader.setBackgroundResource(colorId)
-        binding.fabAddTask.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, colorId))
         return filter
     }
 
@@ -191,34 +219,5 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
-    }
-
-    private fun setupFab() {
-        binding.fabAddTask.setOnClickListener {
-            openCustomDialog()
-        }
-    }
-
-    private fun openCustomDialog() {
-        val viewDialog = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
-        val editText = viewDialog.findViewById<TextInputEditText>(R.id.editTxtTask)
-        val calendarView = viewDialog.findViewById<CalendarView>(R.id.cvCompletionDate)
-
-
-        val alertDialog = AlertDialog.Builder(this)
-            .setView(viewDialog)
-            .create()
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        viewDialog.findViewById<AppCompatButton>(R.id.btnSave).setOnClickListener {
-            val inputText = editText.text.toString()
-            if (inputText.isNotEmpty()) {
-                Toast.makeText(this, inputText + " - " + calendarView.date, Toast.LENGTH_SHORT).show()
-                alertDialog.dismiss()
-            } else {
-                Toast.makeText(this, AppConstants.EMPTY_INPUT_MESSAGE, Toast.LENGTH_SHORT).show()
-            }
-        }
-        alertDialog.show()
     }
 }
