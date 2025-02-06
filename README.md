@@ -45,6 +45,7 @@ Um aplicativo de gerenciamento de tarefas para Android, desenvolvido em Kotlin c
 - Suporte a temas escuros
 - Implementação de testes unitários
 
+---
 
 📧 Contato: Caso tenha dúvidas ou sugestões, sinta-se à vontade para entrar em contato!
 
