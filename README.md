@@ -17,7 +17,6 @@ Um aplicativo de gerenciamento de tarefas para Android, desenvolvido em Kotlin c
 <p>
 <img src="screenshots/screenshot_1.png" width="22%">
 <img src="screenshots/screenshot_2.png" width="22%">
-<img src="screenshots/screenshot_3.png" width="22%">
 <img src="screenshots/screenrecording.gif" width="22%">
 </p>
 
@@ -40,3 +39,13 @@ Um aplicativo de gerenciamento de tarefas para Android, desenvolvido em Kotlin c
 - **/domain:** Classes para as regras de negócios da aplicação, como UseCases e Models e sealed classes.
 
 ---
+## Melhorias Futuras
+
+- Notificações para lembretes de tarefas
+- Suporte a temas escuros
+- Implementação de testes unitários
+
+
+📧 Contato: Caso tenha dúvidas ou sugestões, sinta-se à vontade para entrar em contato!
+
+Desenvolvido com 💙 por Raul.
