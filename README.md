@@ -4,12 +4,12 @@ Um aplicativo de gerenciamento de tarefas para Android, desenvolvido em Kotlin c
 
 ---
 
-## Funcionalidades
--✅ Autenticação de usuários (login e cadastro)
--✅ Adicionar tarefas com data de conclusão
--✅ Listagem de tarefas em diferentes filtros (Hoje, Amanhã, Semana, Mês)
--✅ Concluir ou excluir tarefas
--✅ Interface adaptada para diferentes temas
+## Funcionalidades:
+- ✅ Autenticação de usuários (login e cadastro)
+- ✅ Adicionar tarefas com data de conclusão
+- ✅ Listagem de tarefas em diferentes filtros (Hoje, Amanhã, Semana, Mês)
+- ✅ Concluir ou excluir tarefas
+- ✅ Interface adaptada para diferentes temas
 
 ---
 
