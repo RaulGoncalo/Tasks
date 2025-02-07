@@ -6,6 +6,7 @@ Um aplicativo de gerenciamento de tarefas para Android, desenvolvido em Kotlin c
 
 ## Funcionalidades:
 - ✅ Autenticação de usuários (login e cadastro)
+- ✅ Gerenciamento de token com DataStore
 - ✅ Adicionar tarefas com data de conclusão
 - ✅ Listagem de tarefas em diferentes filtros (Hoje, Amanhã, Semana, Mês)
 - ✅ Concluir ou excluir tarefas
@@ -24,7 +25,7 @@ Um aplicativo de gerenciamento de tarefas para Android, desenvolvido em Kotlin c
 - **Linguagem:** Kotlin
 - **Arquitetura:** MVVM (Model-View-ViewModel) + Clean Architecture
 - **Coroutines**: Implementação de funções não sincronas.
-- **Jetpack:** ViewModel & LiveData
+- **Jetpack:** ViewModel & LiveData, DataStore
 - **Consumo de API:** Retrofit e OkHttp
 - **Injeção de Dependência:** Hilt
 - **Bibliotecas Adicionais:**
