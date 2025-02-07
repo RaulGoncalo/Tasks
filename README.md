@@ -29,7 +29,7 @@ Um aplicativo de gerenciamento de tarefas para Android, desenvolvido em Kotlin c
 - **Consumo de API:** Retrofit e OkHttp
 - **Injeção de Dependência:** Hilt
 - **Bibliotecas Adicionais:**
-  - Dimezis|BlurView (Implementação blurview na tela de detalhes)
+  - Dimezis|BlurView (Implementação blurview nas telas de login e cadastro)
 ---
 
 ## Estrutura do Projeto
