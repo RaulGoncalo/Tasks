@@ -15,7 +15,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-
     @POST(ApiConstants.Endpoints.SIGN_UP)
     suspend fun signUp(
         @Body user: UserModel

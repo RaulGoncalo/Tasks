@@ -22,8 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(ViewModelComponent::class)
 object ApiModule {
     @Provides
-    fun provideAuthInterceptor(): Interceptor {
-        return AuthInterceptor()
+    fun provideAuthInterceptor(userPreferencesRepository: UserPreferencesRepository): Interceptor {
+        return AuthInterceptor(userPreferencesRepository)
     }
 
     @Provides
